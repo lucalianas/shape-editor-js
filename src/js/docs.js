@@ -3,8 +3,12 @@
 
 $(function() {
 
-    var shapeManager = new ShapeManager("shapesCanvas", 512, 512);
+    var WIDTH = 512,
+        HEIGHT = 512;
 
+    var shapeManager = new ShapeManager("shapesCanvas", WIDTH, HEIGHT);
+
+    var zoomPercent = 100;
 
     // set state depending on what we want to do,
     // for example to create Rectangle
@@ -24,12 +28,28 @@ $(function() {
         shapeManager.setLineWidth(lineWidth);
     });
 
+    var updateZoom = function updateZoom() {
+        $("#zoomDisplay").text(zoomPercent + " %");
+        shapeManager.setZoom(zoomPercent);
+        var w = WIDTH * zoomPercent / 100,
+            h = HEIGHT * zoomPercent / 100;
+        $(".imageWrapper img").css({'width': w, 'height': h});
+    };
+
+    $("button[name='zoomIn']").click(function(){
+        zoomPercent += 20;
+        updateZoom();
+    });
+    $("button[name='zoomOut']").click(function(){
+        zoomPercent -= 20;
+        updateZoom();
+    });
+
 
     $("#shapesCanvas").bind("change:selected", function(){
         var color = shapeManager.getColor();
         $("input[value='" + color + "']").prop('checked', 'checked');
         var lineWidth = shapeManager.getLineWidth();
-        console.log(lineWidth);
         $("select[name='lineWidth']").val(lineWidth);
     });
 
