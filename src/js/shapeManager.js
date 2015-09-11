@@ -76,7 +76,8 @@ var ShapeManager = function ShapeManager(elementId, width, height, options) {
             "RECT": new CreateRect({'manager': this, 'paper': this.paper}),
             "ELLIPSE": new CreateEllipse({'manager': this, 'paper': this.paper}),
             "LINE": new CreateLine({'manager': this, 'paper': this.paper}),
-            "ARROW": new CreateArrow({'manager': this, 'paper': this.paper})
+            "ARROW": new CreateArrow({'manager': this, 'paper': this.paper}),
+            "POINT": new CreatePoint({'manager': this, 'paper': this.paper})
         };
 
         this.createShape = this.shapeFactories.LINE;
@@ -127,7 +128,7 @@ ShapeManager.prototype.setState = function setState(state) {
         return;
     }
     // When creating shapes, cover existing shapes with newShapeBg
-    var shapes = ["RECT", "LINE", "ARROW", "ELLIPSE"];
+    var shapes = ["RECT", "LINE", "ARROW", "ELLIPSE", "POINT"];
     if (shapes.indexOf(state) > -1) {
         this.newShapeBg.show().toFront();
         // clear selected shapes
@@ -343,6 +344,13 @@ ShapeManager.prototype.createShapeJson = function createShapeJson(jsonShape) {
         options.x2 = s.x2;
         options.y2 = s.y2;
         newShape = new Arrow(options);
+    }
+    else if (s.type === 'Point') {
+        options.cx = s.cx;
+        options.cy = s.cy;
+        options.r = s.r || 10;
+        options.rotation = s.rotation || 0;
+        newShape = new Point(options);
     }
     return newShape;
 };

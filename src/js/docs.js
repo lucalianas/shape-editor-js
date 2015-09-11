@@ -145,6 +145,11 @@ $(function() {
                                "x1": 400, "y1": 400,
                                "x2": 250, "y2": 310});
 
+    shapeManager.addShapeJson({"type": "Point",
+                               "strokeColor": "#00ff00",
+                               "strokeWidth": 2,
+                               "cx": 400, "cy": 400});
+
     // We start off in the 'SELECT' mode
     shapeManager.setState("SELECT");
 });
