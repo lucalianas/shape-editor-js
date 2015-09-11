@@ -1617,15 +1617,12 @@ CreatePoint.prototype.startDrag = function startDrag(startX, startY) {
     });
 };
 
-CreatePoint.prototype.drag = function drag(dragX, dragY) {};
+CreatePoint.prototype.drag = function drag(dragX, dragY) {
+
+};
 
 CreatePoint.prototype.stopDrag = function stopDrag() {
-    var coords = this.point.toJson();
-    if (coords.rx < 2) {
-        this.point.destroy();
-        delete this.point;
-        return;
-    }
+
     this.point.setSelected(true);
     this.manager.addShape(this.point);
 };
@@ -1647,7 +1644,7 @@ var ShapeManager = function ShapeManager(elementId, width, height, options) {
     options = options || {};
 
     // Keep track of state, strokeColor etc
-    this.STATES = ["SELECT", "RECT", "LINE", "ARROW", "ELLIPSE"];
+    this.STATES = ["SELECT", "RECT", "LINE", "ARROW", "ELLIPSE", "POINT"];
     this._state = "SELECT";
     this._strokeColor = "#ff0000";
     this._strokeWidth = 2;

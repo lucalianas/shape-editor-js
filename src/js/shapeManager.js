@@ -34,7 +34,7 @@ var ShapeManager = function ShapeManager(elementId, width, height, options) {
     options = options || {};
 
     // Keep track of state, strokeColor etc
-    this.STATES = ["SELECT", "RECT", "LINE", "ARROW", "ELLIPSE"];
+    this.STATES = ["SELECT", "RECT", "LINE", "ARROW", "ELLIPSE", "POINT"];
     this._state = "SELECT";
     this._strokeColor = "#ff0000";
     this._strokeWidth = 2;

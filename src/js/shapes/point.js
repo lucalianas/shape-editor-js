@@ -278,15 +278,12 @@ CreatePoint.prototype.startDrag = function startDrag(startX, startY) {
     });
 };
 
-CreatePoint.prototype.drag = function drag(dragX, dragY) {};
+CreatePoint.prototype.drag = function drag(dragX, dragY) {
+
+};
 
 CreatePoint.prototype.stopDrag = function stopDrag() {
-    var coords = this.point.toJson();
-    if (coords.rx < 2) {
-        this.point.destroy();
-        delete this.point;
-        return;
-    }
+
     this.point.setSelected(true);
     this.manager.addShape(this.point);
 };
