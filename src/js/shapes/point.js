@@ -67,7 +67,7 @@ Point.prototype.toJson = function toJson() {
     var rv = {
         'type': 'Ellipse',
         'cx': this._cx,
-        'cy': this.cy,
+        'cy': this._cy,
         'rx': this._rx,
         'ry': this._ry,
         'rotation': this._rotation,
