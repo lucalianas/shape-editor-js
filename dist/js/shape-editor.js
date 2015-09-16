@@ -1472,7 +1472,6 @@ Point.prototype.getStrokeWidth = function getStrokeWidth() {
 
 Point.prototype.destroy = function destroy() {
     this.element.remove();
-    this.handles.remove();
 };
 
 Point.prototype.intersectRegion = function intersectRegion(region) {
