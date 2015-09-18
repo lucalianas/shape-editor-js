@@ -274,6 +274,7 @@ CreatePoint.prototype.startDrag = function startDrag(startX, startY) {
 
     var strokeColor = this.manager.getStrokeColor(),
         strokeWidth = this.manager.getStrokeWidth(),
+        fillOpacity = this.manager.getFillOpacity(),
         zoom = this.manager.getZoom();
 
     this.point = new Point({
@@ -286,7 +287,8 @@ CreatePoint.prototype.startDrag = function startDrag(startX, startY) {
         'strokeWidth': strokeWidth,
         'zoom': zoom,
         'strokeColor': strokeColor,
-        'fillColor': strokeColor
+        'fillColor': strokeColor,
+        'fillOpacity': fillOpacity
     });
 };
 
