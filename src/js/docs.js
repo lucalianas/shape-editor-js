@@ -150,6 +150,18 @@ $(function() {
                                "strokeWidth": 2,
                                "cx": 400, "cy": 400});
 
+    shapeManager.addShapeJson({"type": "Point",
+                               "strokeColor": "#00ff00",
+                               "fillOpacity": 0.5,
+                               "strokeWidth": 2,
+                               "cx": 400, "cy": 300});
+
+    shapeManager.addShapeJson({"type": "Point",
+                               "strokeColor": "#00ff00",
+                               "fillOpacity": 0.01,
+                               "strokeWidth": 2,
+                               "cx": 400, "cy": 200});
+
     // We start off in the 'SELECT' mode
     shapeManager.setState("SELECT");
 });

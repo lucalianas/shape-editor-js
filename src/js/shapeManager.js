@@ -37,6 +37,7 @@ var ShapeManager = function ShapeManager(elementId, width, height, options) {
     this.STATES = ["SELECT", "RECT", "LINE", "ARROW", "ELLIPSE", "POINT"];
     this._state = "SELECT";
     this._strokeColor = "#ff0000";
+    this._fillOpacity = 0.0;
     this._strokeWidth = 2;
     this._orig_width = width;
     this._orig_height = height;
@@ -200,6 +201,18 @@ ShapeManager.prototype.getStrokeColor = function getStrokeColor() {
     return this._strokeColor;
 };
 
+ShapeManager.prototype.setFillOpacity = function setFillOpacity(fillOpacity) {
+    this._fillOpacity = fillOpacity;
+    var selected = this.getSelected();
+    for (var s=0; s<selected.length; s++) {
+        selected[s].setFillOpacity(fillOpacity);
+    }
+};
+
+ShapeManager.prototype.getFillOpacity = function getFillOpacity() {
+    return this._fillOpacity;
+};
+
 ShapeManager.prototype.setStrokeWidth = function setStrokeWidth(strokeWidth) {
     strokeWidth = parseInt(strokeWidth, 10);
     this._strokeWidth = strokeWidth;
@@ -306,12 +319,14 @@ ShapeManager.prototype.createShapeJson = function createShapeJson(jsonShape) {
         newShape,
         strokeColor = s.strokeColor || this.getStrokeColor(),
         strokeWidth = s.strokeWidth || this.getStrokeWidth(),
+        fillOpacity = s.fillOpacity || this.getFillOpacity(),
         zoom = this.getZoom(),
         options = {'manager': this,
                    'paper': this.paper,
                    'strokeWidth': strokeWidth,
                    'zoom': zoom,
-                   'strokeColor': strokeColor};
+                   'strokeColor': strokeColor,
+                   'fillOpacity': fillOpacity};
     if (jsonShape.id) {
         options.id = jsonShape.id;
     }

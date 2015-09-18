@@ -21,6 +21,7 @@ var Point = function Point(options) {
 
     this._strokeColor = options.strokeColor;
     this._strokeWidth = options.strokeWidth || 2;
+    this._fillOpacity = options.fillOpacity || 1;
     this._selected = false;
     this._zoomFraction = 1;
     if (options.zoom) {
@@ -73,7 +74,8 @@ Point.prototype.toJson = function toJson() {
         'rotation': this._rotation,
         'strokeWidth': this._strokeWidth,
         'strokeColor': this._strokeColor,
-        'fillColor': this._strokeColor
+        'fillColor': this._strokeColor,
+        'fillOpacity': this._fillOpacity
     };
     if (this._id) {
         rv.id = this._id;
@@ -119,6 +121,15 @@ Point.prototype.getStrokeColor = function getStrokeColor() {
 
 Point.prototype.setStrokeColor = function setStrokeColor(strokeColor) {
     this._strokeColor = strokeColor;
+    this.drawShape();
+};
+
+Point.prototype.getFillOpacity = function getFillOpacity() {
+    return this._fillOpacity;
+};
+
+Point.prototype.setFillOpacity = function setFillOpacity(fillOpacity) {
+    this._fillOpacity = fillOpacity;
     this.drawShape();
 };
 
@@ -219,7 +230,8 @@ Point.prototype.updateShapeFromHandles = function updateShapeFromHandles(resizeW
 Point.prototype.drawShape = function drawShape() {
 
     var strokeColor = this._strokeColor,
-        strokeW = this._strokeWidth * this._zoomFraction;
+        strokeW = this._strokeWidth * this._zoomFraction,
+        fillOpacity = this._fillOpacity;
 
     var f = this._zoomFraction,
         cx = this._cx * f,
@@ -233,6 +245,7 @@ Point.prototype.drawShape = function drawShape() {
                        'ry': ry,
                        'stroke': strokeColor,
                        'fill': strokeColor,
+                       'fill-opacity': fillOpacity,
                        'stroke-width': strokeW});
     this.element.transform('r'+ this._rotation);
 
